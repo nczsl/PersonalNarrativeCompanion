@@ -1,0 +1,49 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Avalonia" Version="*" />
+    <PackageReference Include="Avalonia.Desktop" Version="*" />
+    <PackageReference Include="Avalonia.Themes.Fluent" Version="*" />
+    <PackageReference Include="Avalonia.Fonts.Inter" Version="*" />
+    <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
+    <PackageReference Include="Avalonia.Diagnostics" Version="*">
+      <IncludeAssets Condition="'$(Configuration)' != 'Debug'">None</IncludeAssets>
+      <PrivateAssets Condition="'$(Configuration)' != 'Debug'">All</PrivateAssets>
+    </PackageReference>
+
+    <!-- Added icon and Ursa packages -->
+    <PackageReference Include="Irihi.Ursa" Version="*" />
+    <PackageReference Include="Projektanker.Icons.Avalonia.FontAwesome" Version="*" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Include Assets so avares:// URIs work and include icon in build output -->
+    <AvaloniaResource Include="Assets\**\*" />
+    <None Include="Assets\pnc_icon.ico">
+      <Pack>true</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <PropertyGroup>
+    <ApplicationIcon>Assets\pnc_icon.ico</ApplicationIcon>
+    <Win32Icon>Assets\pnc_icon.ico</Win32Icon>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\PNC.Core\PNC.Core.csproj" />
+    <ProjectReference Include="..\PNC.Domain.Models\PNC.Domain.Models.csproj" />
+    <ProjectReference Include="..\PNC.Services.Email\PNC.Services.Email.csproj" />
+    <ProjectReference Include="..\PNC.Platform.Windows\PNC.Platform.Windows.csproj" />
+    <ProjectReference Include="..\PNC.Infrastructure\PNC.Infrastructure.csproj" />
+    <ProjectReference Include="..\PNC.View.Common\PNC.View.Common.csproj" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,16 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/PNC.App/PNC.App.csproj" />
+    <Project Path="src/PNC.Core/PNC.Core.csproj" />
+    <Project Path="src/PNC.Data.Sqlite/PNC.Data.Sqlite.csproj" />
+    <Project Path="src/PNC.Domain.Models/PNC.Domain.Models.csproj" />
+    <Project Path="src/PNC.Infrastructure/PNC.Infrastructure.csproj" />
+    <Project Path="src/PNC.Platform.Windows/PNC.Platform.Windows.csproj" />
+    <Project Path="src/PNC.Services.Email/PNC.Services.Email.csproj" />
+    <Project Path="src/PNC.Services.Messaging/PNC.Services.Messaging.csproj" />
+    <Project Path="src/PNC.View.Common/PNC.View.Common.csproj" />
+  </Folder>
+  <Folder Name="/test/">
+    <Project Path="test/PNC.Tests/PNC.Tests.csproj" />
+  </Folder>
+</Solution>

@@ -1,0 +1,51 @@
+<Application xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="PNC.App.App">
+
+  <Application.Styles>
+    <FluentTheme />
+
+    <!-- Styles for window chrome -->
+    <Style Selector="Border.window-frame">
+      <Setter Property="Background" Value="{DynamicResource Surface}" />
+      <Setter Property="BorderBrush" Value="{DynamicResource WindowBorder}" />
+      <Setter Property="BorderThickness" Value="1" />
+      <Setter Property="CornerRadius" Value="8" />
+      <Setter Property="Padding" Value="0" />
+    </Style>
+
+    <Style Selector="Border.titlebar-area">
+      <Setter Property="Background" Value="Transparent" />
+      <Setter Property="Padding" Value="8" />
+    </Style>
+
+    <Style Selector="Button.titlebar">
+      <Setter Property="Background" Value="Transparent" />
+      <Setter Property="Foreground" Value="{DynamicResource TextPrimary}" />
+      <Setter Property="BorderBrush" Value="Transparent" />
+      <Setter Property="Padding" Value="6,4" />
+      <Setter Property="FontSize" Value="12" />
+    </Style>
+
+  </Application.Styles>
+
+  <Application.Resources>
+    <!-- Color tokens -->
+    <Color x:Key="AppBackgroundColor">#FF0F1720</Color>
+    <Color x:Key="SurfaceColor">#FF111827</Color>
+    <Color x:Key="AccentColor">#FF1F6FEB</Color>
+    <Color x:Key="WindowBorderColor">#FF0B1220</Color>
+
+    <!-- Brushes -->
+    <SolidColorBrush x:Key="AppBackground" Color="{StaticResource AppBackgroundColor}"/>
+    <SolidColorBrush x:Key="Surface" Color="{StaticResource SurfaceColor}"/>
+    <SolidColorBrush x:Key="Accent" Color="{StaticResource AccentColor}"/>
+    <SolidColorBrush x:Key="WindowBorder" Color="{StaticResource WindowBorderColor}"/>
+    <SolidColorBrush x:Key="TextPrimary" Color="#FFFFFFFF"/>
+    <SolidColorBrush x:Key="TextSecondary" Color="#FFB0BEC5"/>
+
+    <!-- Layout tokens -->
+    <Thickness x:Key="WindowPadding">12</Thickness>
+
+  </Application.Resources>
+</Application>

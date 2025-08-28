@@ -1,0 +1,40 @@
+<Window xmlns="https://github.com/avaloniaui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:i="https://github.com/projektanker/icons.avalonia"
+  xmlns:views="clr-namespace:PNC.App.View;assembly=PNC.App"
+  mc:Ignorable="d" d:DesignWidth="900" d:DesignHeight="600"
+  x:Class="PNC.App.MainWindow"
+    Title="PNC - Personal Narrative Companion"
+    SystemDecorations="None"
+    CanResize="True"
+    ExtendClientAreaToDecorationsHint="True"
+    ExtendClientAreaChromeHints="NoChrome"
+  Background="{DynamicResource Surface}">
+
+  <Border Classes="window-frame" Margin="6">
+
+    <Grid RowDefinitions="Auto, *">
+      <!-- Title bar -->
+      <Border Classes="titlebar-area" Grid.Row="0" PointerPressed="TitleBar_PointerPressed" DoubleTapped="TitleBar_DoubleTapped">
+        <Grid ColumnDefinitions="Auto, *, Auto" VerticalAlignment="Center">
+          <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
+            <Image Width="28" Height="28" Source="avares://PNC.App/Assets/pnc_icon.ico" />
+          </StackPanel>
+          <TextBlock Grid.Column="1" Text="{Binding Title, RelativeSource={RelativeSource AncestorType=Window}}" VerticalAlignment="Center" Foreground="{DynamicResource TextPrimary}" FontSize="14" FontWeight="SemiBold" Margin="8,0"/>
+          <StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right" Spacing="4">
+            <Button Classes="titlebar" Click="Minimize_Click" ToolTip.Tip="Minimize" i:Attached.Icon="fa-solid fa-window-minimize" />
+            <Button Classes="titlebar" Click="MaximizeRestore_Click" ToolTip.Tip="Maximize" i:Attached.Icon="fa-solid fa-window-maximize" />
+            <Button Classes="titlebar" Click="Close_Click" ToolTip.Tip="Close" i:Attached.Icon="fa-solid fa-xmark" />
+          </StackPanel>
+        </Grid>
+      </Border>
+      <!-- Main content -->
+  <Border Grid.Row="1" Background="{DynamicResource AppBackground}" Padding="6,6,6,12">
+        <!-- Let the calendar stretch to fill the available space. -->
+        <views:CalendarView HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0" />
+      </Border>
+    </Grid>
+  </Border>
+</Window>

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:PNC.App.ViewModels"
+             x:Class="PNC.App.View.CalendarView"
+             x:DataType="vm:CalendarViewModelAdapter"
+             mc:Ignorable="d"
+             HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+
+  <UserControl.DataContext>
+    <vm:CalendarViewModelAdapter />
+  </UserControl.DataContext>
+
+  <Grid Margin="0,0,0,6">
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="48" />
+      <RowDefinition Height="*" />
+    </Grid.RowDefinitions>
+
+    <!-- Header -->
+    <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" Grid.Row="0" Margin="0,0,0,8">
+      <Button Content="&lt;" Width="28" Command="{Binding PrevMonthCommand}" />
+      <TextBlock Text="{Binding VisibleMonth, StringFormat='{}{0:MMMM yyyy}'}" FontWeight="Bold" VerticalAlignment="Center" Margin="8,0" />
+      <Button Content=">" Width="28" Command="{Binding NextMonthCommand}" HorizontalAlignment="Left" />
+      <Button Content="Today" Command="{Binding TodayCommand}" HorizontalAlignment="Right" Margin="8,0,0,0" />
+    </StackPanel>
+
+    <!-- Weekday headers -->
+    <UniformGrid Grid.Row="1" Columns="7" Rows="1" Margin="0,0,0,6">
+      <TextBlock Text="Mon" HorizontalAlignment="Center" FontWeight="Bold" FontSize="14" Padding="6" />
+      <TextBlock Text="Tue" HorizontalAlignment="Center" FontWeight="Bold" FontSize="14" Padding="6" />
+      <TextBlock Text="Wed" HorizontalAlignment="Center" FontWeight="Bold" FontSize="14" Padding="6" />
+      <TextBlock Text="Thu" HorizontalAlignment="Center" FontWeight="Bold" FontSize="14" Padding="6" />
+      <TextBlock Text="Fri" HorizontalAlignment="Center" FontWeight="Bold" FontSize="14" Padding="6" />
+      <TextBlock Text="Sat" HorizontalAlignment="Center" FontWeight="Bold" FontSize="14" Padding="6" />
+      <TextBlock Text="Sun" HorizontalAlignment="Center" FontWeight="Bold" FontSize="14" Padding="6" />
+    </UniformGrid>
+
+    <!-- Month grid: 6 rows x 7 cols -->
+    <ItemsControl x:DataType="vm:CalendarViewModelAdapter" Grid.Row="2" ItemsSource="{Binding Days}">
+      <ItemsControl.ItemsPanel>
+        <ItemsPanelTemplate>
+          <UniformGrid Rows="6" Columns="7" />
+        </ItemsPanelTemplate>
+      </ItemsControl.ItemsPanel>
+
+      <ItemsControl.ItemTemplate>
+        <DataTemplate x:DataType="vm:DayCellViewModel">
+          <Border BorderBrush="#DDD" BorderThickness="0.5" Padding="2" Background="Transparent">
+            <Grid>
+              <Grid.RowDefinitions>
+                <RowDefinition Height="20" />
+                <RowDefinition Height="*" />
+              </Grid.RowDefinitions>
+
+              <!-- Day number in top-left (bind directly to Date.Day to avoid DayNumber binding issues) -->
+              <TextBlock Grid.Row="0" Text="{Binding Date.Day, StringFormat='{}{0}'}" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="2,0,0,0" Foreground="{Binding ForegroundBrush}" FontWeight="SemiBold" />
+
+              <!-- Plans list below day number -->
+              <ItemsControl x:DataType="vm:DayCellViewModel" Grid.Row="1" ItemsSource="{Binding Plans}" Margin="0,2,0,0">
+                <ItemsControl.ItemTemplate>
+                  <DataTemplate x:DataType="vm:PlanItemViewModel">
+                    <Border Background="{Binding Color}" CornerRadius="0" Padding="1" Margin="1" HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                      <TextBlock Text="{Binding Title}" TextTrimming="CharacterEllipsis" MaxLines="3" FontSize="9" Margin="1" Foreground="{Binding ForegroundBrush}" />
+                    </Border>
+                  </DataTemplate>
+                </ItemsControl.ItemTemplate>
+              </ItemsControl>
+            </Grid>
+          </Border>
+        </DataTemplate>
+      </ItemsControl.ItemTemplate>
+    </ItemsControl>
+  </Grid>
+</UserControl>
